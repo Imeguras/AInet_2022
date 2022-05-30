@@ -14,3 +14,4 @@ yarn-error.log
 /.vscode
 *.code-workspace
 /database
+.phpintel
