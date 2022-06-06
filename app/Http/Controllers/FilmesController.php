@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Database\Eloquent\Builder;
+
 
 use Illuminate\Http\Request;
 use App\Models\Filme;
+use App\Models\Sessao;
 
 class FilmesController extends Controller
 {
@@ -21,10 +24,10 @@ class FilmesController extends Controller
    
    public function index()
    {
-       //$filmes = Filme::all();
-       $filmes = Filme::select('id','trailer_url','titulo','sumario','genero_code')->paginate(10);
-       //$filmes = $qry;//->paginate(10);
-       //dd($filmes);
+       $filmes = Filme::whereHas('sessoes', function(Builder $query) {
+            $query->where('data', '>', date("Y-m-d"))->where('data', '<', date("Y-m-d", strtotime("+15 days")));
+       })->paginate(10);
+        
        return view('filmes.index')->withFilmes($filmes);
    }
 

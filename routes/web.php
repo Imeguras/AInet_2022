@@ -15,8 +15,6 @@ use App\Http\Controllers\FilmesController;
 */
 
 Auth::routes();
+Route::get('/', [FilmesController::class, 'index'])->name('filmes');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
-Route::get('/filmes', [FilmesController::class, 'index'])->name('filmes');
