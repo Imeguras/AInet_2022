@@ -28,6 +28,20 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Filme whereSalaId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Filme whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $titulo
+ * @property string $genero_code
+ * @property int $ano
+ * @property string|null $cartaz_url
+ * @property string $sumario
+ * @property string|null $trailer_url
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Sessao[] $sessoes
+ * @property-read int|null $sessoes_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Filme whereAno($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Filme whereCartazUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Filme whereGeneroCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Filme whereSumario($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Filme whereTitulo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Filme whereTrailerUrl($value)
  */
 class Filme extends Model
 {
