@@ -25,8 +25,10 @@ class FilmesController extends Controller
    public function index()
    {
        $filmes = Filme::whereHas('sessoes', function(Builder $query) {
-            $query->where('data', '>', date("Y-m-d"))->where('data', '<', date("Y-m-d", strtotime("+15 days")));
+            $query->where('data', '>', date("Y-m-d"));
        })->paginate(10);
+
+       //dd($filmes);
         
        return view('filmes.index')->withFilmes($filmes);
    }
