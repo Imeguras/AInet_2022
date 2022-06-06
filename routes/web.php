@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FilmesController;
+use App\Http\Controllers\UserController; 
 
 /*
 |--------------------------------------------------------------------------
@@ -17,4 +18,5 @@ use App\Http\Controllers\FilmesController;
 Auth::routes();
 Route::get('/', [FilmesController::class, 'index'])->name('filmes');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/alterprofile',  [UserController::class, 'index'])->name('alterprofile');
+Route::post('/alterprofile', [UserController::class, 'alterProfile'])->name('alterprofilesubmit');
