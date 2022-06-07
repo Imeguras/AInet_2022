@@ -30,7 +30,33 @@ class FilmesController extends Controller
 
        //dd($filmes);
         
-       return view('filmes.index')->withFilmes($filmes);
+       return view('filmes.index')
+              ->withFilmes($filmes);
+   }
+
+   public function comprar($id)
+   { 
+       $filme = Filme::where('id', $id)->first();
+       //dd($filme);
+       
+       //Deveria passar só as sessões que têm lugares disponiveis...
+       //para isso, ver quantos bilhetes já existem para determinada sessão e comparar com o número de lugares na sala em que a sessão ocurrerá
+       //
+       //SQL: $numLugares = select count(*) from lugares where sala_id = $sessao->sala_id
+       //SQL: $numBilhetes = select count(*) from bilhetes where sessao_id = $sessao->id
+       //só é selecionada a sessão se $numLugares > $numBilhetes
+       //
+       $sessoes = Sessao::where([
+                    ['filme_id', $filme->id],
+                    ['data', '>=', date("Y-m-d")]
+                ])->get();
+
+       //dd($sessoes);
+       
+
+       return view('filmes.comprar')
+              ->withFilme($filme)
+              ->withSessoes($sessoes);
    }
 
 }

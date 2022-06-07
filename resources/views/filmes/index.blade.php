@@ -15,10 +15,11 @@
 									@endisset
 								 	<div class="card-body">
 								    <h5 class="card-title">{{$filme->titulo}}</h5>
+								    <p class="card-text"> Ano : {{$filme->ano}} </p>
 								    <p class="card-text"> Género : {{$filme->genero_code}}</p>
 								    <p class="card-text"> {{$filme->sumario}}</p>
 								    <div class="card-footer text-center">
-								    	<a href="#" class="btn btn-primary">Comprar Bilhete</a>
+								    	<a href="{{route('comprar', ['id' => $filme->id])}}" class="btn btn-primary">Comprar Bilhete</a>
 								    	@isset($filme->cartaz_url)
 								    		<button class="btn btn-primary" onclick="showHideCartaz({{$filme->id}})">Mostrar cartaz</button>
 								    		<img  id ="CartazFilme{{$filme->id}}" src = "{{ asset('storage/cartazes/' . $filme->cartaz_url) }}" class="card-img-bottom" alt="Cartaz filme" style="display: none"> 
