@@ -34,7 +34,7 @@ class FilmesController extends Controller
               ->withFilmes($filmes);
    }
 
-   public function comprar($id)
+   public function sessoes($id)
    { 
        $filme = Filme::where('id', $id)->first();
        //dd($filme);
@@ -56,7 +56,7 @@ class FilmesController extends Controller
 
        //dd($sessoes);
        
-       return view('filmes.comprar')
+       return view('filmes.sessoes')
               ->withFilme($filme)
               ->withSessoes($sessoes);
    }

@@ -18,4 +18,4 @@ Auth::routes();
 Route::get('/', [FilmesController::class, 'index'])->name('filmes');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/filme/{id}/comprar', [FilmesController::class, 'comprar'])->name('comprar');
+Route::get('/filme/{id}/sessoes', [FilmesController::class, 'sessoes'])->name('sessoes');
