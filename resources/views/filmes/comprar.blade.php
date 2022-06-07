@@ -18,7 +18,7 @@
 					        @endisset
 				            <div class="col">
 				                <div class="card-block px-2">
-				                    <h5 class="card-title">Género: {{$filme->genero_code}}</h5>
+				                    <h5 class="card-title">Género: {{$filme->genero->nome}}</h5>
 				                    <p class="card-text">Ano: {{$filme->ano}} </p>
 				                    <p class="card-text">{{$filme->sumario}}</p>
 				                </div>
@@ -26,30 +26,32 @@
 				    	</div>
                 	</div>
 	            	<br>
-		            <table class="table table-borderless table-hover">
-					  <thead>
-					    <tr>
-					      <th scope="col">Sala</th>
-					      <th scope="col">Data</th>
-					      <th scope="col">Horário Inicio</th>
-					      <th scope="col">Lugares Disponiveis </th>
-					      <th scope="col"></th>
-					    </tr>
-					  </thead>
-					  <tbody>
-					    @foreach($sessoes as $key => $sessao)
+	            	<div class="text-center">
+			            <table class="table table-borderless table-hover">
+						  <thead>
 						    <tr>
-						    	<td>{{$sessao->sala_id}}</td>
-						    	<td>{{$sessao->data}}</td>
-						    	<td>{{$sessao->horario_inicio}}</td>
-						    	<td>Placeholder: {{$key}}</td>
-						    	@if(Auth::user() !== null /*Se houver utilizador autenticado*/) 
-						    		<td><a href= "#" class="btn btn-primary justify-content-right">Comprar Bilhete</a></td>
-						    	@endif
+						      <th scope="col">Sala</th>
+						      <th scope="col">Data</th>
+						      <th scope="col">Horário Inicio</th>
+						      <th scope="col">Lugares Disponiveis </th>
+						      <th scope="col"></th>
 						    </tr>
-					    @endforeach
-					  </tbody>
-					</table>
+						  </thead>
+						  <tbody>
+						    @foreach($sessoes as $key => $sessao)
+							    <tr>
+							    	<td>{{$sessao->sala_id}}</td>
+							    	<td>{{$sessao->data}}</td>
+							    	<td>{{$sessao->horario_inicio}}</td>
+							    	<td>{{$sessao->lugares_count - $sessao->bilhetes_count}}</td>
+							    	@if(Auth::user() !== null /*Se houver utilizador autenticado*/) 
+							    		<td><a href= "#" class="btn btn-primary justify-content-right">Escolher Sessão</a></td>
+							    	@endif
+							    </tr>
+						    @endforeach
+						  </tbody>
+						</table>
+					</div>
 				</div>
         	</div>
     	</div>

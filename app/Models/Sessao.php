@@ -21,4 +21,12 @@ class Sessao extends Model
     public function sala(){
         return $this->belongsTo(Sala::class);
     }
+
+    public function lugares(){
+        return $this->hasManyThrough(Lugar::class, Sala::class,
+            'id',
+            'sala_id',
+            'sala_id',
+            'id');
+    }
 }

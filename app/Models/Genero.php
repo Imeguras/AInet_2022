@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Genero extends Model{
     use HasFactory;
-	protected $table = "generos"; 
+	protected $table = "generos";
+    protected $primaryKey = "code";
 
 	public function filmes()
     {

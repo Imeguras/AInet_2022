@@ -46,14 +46,16 @@ class FilmesController extends Controller
        //SQL: $numBilhetes = select count(*) from bilhetes where sessao_id = $sessao->id
        //só é selecionada a sessão se $numLugares > $numBilhetes
        //
-       $sessoes = Sessao::where([
+       
+       /*$sessoes = Sessao::where([
                     ['filme_id', $filme->id],
                     ['data', '>=', date("Y-m-d")]
-                ])->get();
+                ])->get();*/
+
+        $sessoes = Sessao::withCount('lugares')->withCount('bilhetes')->where('filme_id', $filme->id)->where('data', '>=', date("Y-m-d"))->havingRaw('bilhetes_count < lugares_count')->get();
 
        //dd($sessoes);
        
-
        return view('filmes.comprar')
               ->withFilme($filme)
               ->withSessoes($sessoes);
