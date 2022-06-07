@@ -29,8 +29,17 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Cliente whereUpdatedAt($value)
  * @mixin \Eloquent
  */
+
 class Cliente extends Model
 {
     use HasFactory;
 	protected $table = "clientes"; 
+
+    public function bilhetes(){
+        return $this->hasMany(Bilhete::class);
+    }
+
+    public function recibos(){
+        return $this->hasMany(Recibo::class);
+    }
 }

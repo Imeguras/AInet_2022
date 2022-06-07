@@ -37,6 +37,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Users whereUpdatedAt($value)
  * @mixin \Eloquent
  */
+
 class Users extends Model
 {
     use HasFactory;
@@ -44,4 +45,5 @@ class Users extends Model
 	protected $primaryKey = 'id';
 	
 	public $timestamps = true;
+
 }

@@ -25,7 +25,16 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Lugar whereSalaId($value)
  * @mixin \Eloquent
  */
+
 class Lugar extends Model{
     use HasFactory;
 	protected $table = "lugares"; 
+
+    public function bilhetes(){
+        return $this->hasMany(Bilhete::class);
+    }
+
+    public function sala(){
+        return $this->belongsTo(Sala::class);
+    }
 }
