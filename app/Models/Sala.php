@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+
 /**
  * App\Models\Sala
  *
@@ -20,8 +21,17 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Sala whereNome($value)
  * @mixin \Eloquent
  */
+
 class Sala extends Model
 {
     use HasFactory;
 	protected $table = "salas"; 
+
+    public function lugares(){
+        return $this->hasMany(Lugar::class);
+    }
+
+    public function sessoes(){
+        return $this->hasMany(Sala::class);
+    }
 }

@@ -41,8 +41,17 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Recibo whereUpdatedAt($value)
  * @mixin \Eloquent
  */
+
 class Recibo extends Model
 {
     use HasFactory;
 	protected $table = "recibos"; 
+
+    public function bilhetes(){
+        return $this->hasMany(Bilhete::class);
+    }
+
+    public function cliente(){
+        return $this->belongsTo(Cliente::class);
+    }
 }
