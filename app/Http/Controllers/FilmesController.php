@@ -76,7 +76,11 @@ class FilmesController extends Controller
                     ['data', '>=', date("Y-m-d")]
                 ])->get();*/
 
-        $sessoes = Sessao::withCount('lugares')->withCount('bilhetes')->where('filme_id', $filme->id)->where('data', '>=', date("Y-m-d"))->havingRaw('bilhetes_count < lugares_count')->get();
+        //hora à 5 min
+        $time = date("H:i" , mktime(date("H"), date("i")-5));
+        //dd($time);
+
+        $sessoes = Sessao::where('horario_inicio','>=',$time)->withCount('lugares')->withCount('bilhetes')->where('filme_id', $filme->id)->where('data', '>=', date("Y-m-d"))->havingRaw('bilhetes_count < lugares_count')->get();
 
        //dd($sessoes);
        

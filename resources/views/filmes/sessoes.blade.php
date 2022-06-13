@@ -44,9 +44,7 @@
 							    	<td>{{$sessao->data}}</td>
 							    	<td>{{$sessao->horario_inicio}}</td>
 							    	<td>{{$sessao->lugares_count - $sessao->bilhetes_count}}</td>
-							    	@if(Auth::user() !== null /*Se houver utilizador autenticado*/) 
-							    		<td><a href= "#" class="btn btn-primary justify-content-right">Escolher Sessão</a></td>
-							    	@endif
+							    	<td><a href= "#" class="btn btn-primary justify-content-right">Adicionar ao Carrinho</a></td>
 							    </tr>
 						    @endforeach
 						  </tbody>
