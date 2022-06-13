@@ -25,9 +25,15 @@ class LugarController extends Controller
         //dd($lugares_ocupados);
         //dd($lugares);
 
+        $lugares_sessao = array();
+        foreach (session('bilhetes') as $sessaoBilhetes) {
+            array_push($lugares_sessao, $sessaoBilhetes['lugar_id']);
+        }
+
         return view('lugar.escolher')
                 ->withLugares($lugares)
                 ->withSessao($sessao)
-                ->withLugaresOcupados($lugares_ocupados);
+                ->withLugaresOcupados($lugares_ocupados)
+                ->withSessaoLugares($lugares_sessao);
     }
 }

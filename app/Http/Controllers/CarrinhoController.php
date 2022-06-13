@@ -11,22 +11,42 @@ class CarrinhoController extends Controller
                 ->withBilhetes(session('bilhetes'));
     }
 
-    public function adicionar($idSessao, $idLugar)
+/*
+    public function teste(Request $request){
+        //dd($request->input('lugares'));
+        return view('teste');
+    }
+*/
+
+    public function adicionar(Request $request)
     {
-        //criar bilhete
-        //criar parcialmente o bilhete.
-        $bilhete = ['sessao_id' => $idSessao,
-                    'lugar_id' => $idLugar,
-                    ];
-        //adicionar ao carrinho
-        $bilhetes = session('bilhetes');
-        
-        if (!$bilhetes) {
-            $bilhetes =  array();
+        $lugaresID = $request->input('lugares');
+        $sessaoID = $request->input('sessaoID');
+
+        $adicionados = 0;
+        //dd($lugaresID);
+        foreach ($lugaresID as $id) {
+
+            if (in_array($id, session('bilhetes'))) {
+                continue;
+            }
+
+            $bilhete = ['sessao_id' => $sessaoID,
+                        'lugar_id' => $id
+                        ]; 
+
+            $adicionados++;
+            session()->push('bilhetes', $bilhete);
         }
 
-        session()->put($bilhete, $bilhetes);
-
-        return redirect()->back()->with('success', 'Bilhete adicionado ao carrinho.');
+        if ($adicionados == 0) {
+            session()->flash('error', 'Não há bilhetes novos a adicionar.');    
+        }elseif ($adicionados == 1) {
+            session()->flash('success', 'Bilhete adicionado ao carrinho de compras com sucesso.');
+        }else{
+            session()->flash('success', 'Bilhetes adicionados ao carrinho de compras com sucesso.');
+        }
+        
+        return redirect()->route('filmes');
     }
 }

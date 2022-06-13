@@ -9,6 +9,17 @@
                 	<h3>Filmes</h3>
                 </div>
                 <div class="card-body">
+                	@if ($message = Session::get('success'))
+	                	<div class="alert alert-success" role="alert">
+							<h4 class="alert-heading">Sucesso !</h4>
+						    <p>{{$message}} Clique <a href="{{ route('carrinho_compras') }}" class="alert-link">aqui</a> para ir para o carrinho de compras </p>
+						</div>
+					@elseif($message = Session::get('error'))
+	                	<div class="alert alert-danger" role="alert">
+							<h4 class="alert-heading">Erro !</h4>
+						    <p>{{$message}}</p>
+						</div>
+					@endif
                 	<div>
                 		<form action="{{route('filmes')}}">
                 			<div class="row">
