@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use App\Models\Filme;
 use App\Models\Sessao;
+use App\Models\Genero;
 
 class FilmesController extends Controller
 {
@@ -22,16 +23,39 @@ class FilmesController extends Controller
             ->withSelectedCurso($curso);
     */
    
-   public function index()
+   public function index(Request $request)
    {
-       $filmes = Filme::whereHas('sessoes', function(Builder $query) {
-            $query->where('data', '>', date("Y-m-d"));
-       })->paginate(10);
+        $request->flash();
+        $qry = Filme::query();
 
-       //dd($filmes);
+        if ($request->input('titulo') !== null){
+            $titulo = '%'.$request->input('titulo').'%';
+             $qry->where('titulo', 'like', $titulo);
+        }
+
+        if ($request->input('sumario') !== null){
+            $sumario = '%'.$request->input('sumario').'%';
+            $qry->where('sumario', 'like', $sumario);
+        }
+
+        if ($request->input('genero') != ""){
+            $qry->where('genero_code', $request->input('genero'));
+        }
+
+        $filmes = $qry->whereHas('sessoes', function(Builder $query) {
+            $query->where('data', '>', date("Y-m-d"));
+        })->paginate(10);
+
+
+        //dd($filmes);
+       
+        $generos = Genero::all();
+
+        //dd($generos);
         
-       return view('filmes.index')
-              ->withFilmes($filmes);
+        return view('filmes.index')
+              ->withFilmes($filmes)
+              ->withGeneros($generos);
    }
 
    public function sessoes($id)
