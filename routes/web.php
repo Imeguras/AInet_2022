@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FilmesController;
 use App\Http\Controllers\CarrinhoController;
+use App\Http\Controllers\LugarController;
 
 
 /*
@@ -22,3 +23,4 @@ Route::get('/', [FilmesController::class, 'index'])->name('filmes');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/filme/{id}/sessoes', [FilmesController::class, 'sessoes'])->name('sessoes');
 Route::get('/carrinho-de-compras', [CarrinhoController::class, 'index'])->name('carrinho_compras');
+Route::get('/escolher-lugar/{id}', [LugarController::class, 'escolher'])->name('escolher_lugar');

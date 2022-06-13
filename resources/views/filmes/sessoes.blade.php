@@ -28,6 +28,7 @@
 	            	<br>
 	            	<div class="text-center">
 			            <table class="table table-borderless table-hover">
+			            	<caption>Lista de Sessões</caption>
 						  <thead>
 						    <tr>
 						      <th scope="col">Sala</th>
@@ -44,7 +45,7 @@
 							    	<td>{{$sessao->data}}</td>
 							    	<td>{{$sessao->horario_inicio}}</td>
 							    	<td>{{$sessao->lugares_count - $sessao->bilhetes_count}}</td>
-							    	<td><a href= "#" class="btn btn-primary justify-content-right">Adicionar ao Carrinho</a></td>
+							    	<td><a href="{{route('escolher_lugar',['id' => $sessao->id])}}"  class="btn btn-primary justify-content-right">Adicionar ao Carrinho</a></td>
 							    </tr>
 						    @endforeach
 						  </tbody>

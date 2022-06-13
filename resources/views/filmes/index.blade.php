@@ -22,7 +22,6 @@
 								    	<option value="" @if("" == old('genero')) selected @endif> </option>
 									    @foreach($generos as $genero)
 									    	<option value="{{$genero->code}}" @if($genero->code == old('genero')) selected @endif>{{$genero->nome}} </option>
-									    	}
 									    @endforeach
 								    </select>
 								</div>
