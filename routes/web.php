@@ -20,3 +20,4 @@ Route::get('/', [FilmesController::class, 'index'])->name('filmes');
 
 Route::get('/alterprofile',  [UserController::class, 'index'])->name('alterprofile');
 Route::post('/alterprofile', [UserController::class, 'alterProfile'])->name('alterprofilesubmit');
+Route::post('/alteruser', [UserController::class, 'alterUser'])->name('alterUsersubmit');
