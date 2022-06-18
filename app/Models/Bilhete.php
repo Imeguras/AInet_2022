@@ -31,8 +31,26 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Bilhete whereUpdatedAt($value)
  * @mixin \Eloquent
  */
+
 class Bilhete extends Model
 {
     use HasFactory;
 	protected $table = "bilhetes"; 
+
+    public function clientes(){
+        return $this->belongsTo(Cliente::class);
+    }
+
+    public function sessoes(){
+        return $this->belongsTo(Sessao::class);
+    }
+
+    public function lugares(){
+        return $this->hasMany(Lugar::class);
+    }
+
+    public function recibos(){
+        return $this->hasMany(Recibo::class);
+    }
+
 }

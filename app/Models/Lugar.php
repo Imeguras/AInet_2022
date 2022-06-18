@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Models\Lugar
@@ -25,7 +26,16 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Lugar whereSalaId($value)
  * @mixin \Eloquent
  */
+
 class Lugar extends Model{
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 	protected $table = "lugares"; 
+
+    public function bilhetes(){
+        return $this->hasMany(Bilhete::class);
+    }
+
+    public function sala(){
+        return $this->belongsTo(Sala::class);
+    }
 }
