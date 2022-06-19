@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FilmesController;
 use App\Http\Controllers\UserController; 
+use App\Http\Controllers\Auth\RegisterController; 
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +16,8 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Auth::routes();
+Auth::routes(['verify'=>true]);
+
 Route::get('/', [FilmesController::class, 'index'])->name('filmes');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

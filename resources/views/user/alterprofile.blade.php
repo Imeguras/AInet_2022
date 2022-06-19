@@ -54,6 +54,17 @@
 									</span>
 								@enderror
 							</div>
+							
+							
+								<!-- a disabled checkbox to check if the email was verified if it wasnt add a button that redirects to page auth.verify -->
+								<label id="nif-lbl10" for="verMail" class="col-md-4 col-form-label text-md-end">
+									{{ __('Estado da Verifação do Mail') }}
+								</label>
+									<div id="verMail" class="col-md-6">
+										<input type="checkbox" disabled {{ $user->email_verified_at ? 'checked' : '' }}>
+
+									</div>
+							
 							<!--If user is client-->
 							
 								<label id="nif-lbl1" for="nif-input1" class="col-md-4 col-form-label text-md-end">
