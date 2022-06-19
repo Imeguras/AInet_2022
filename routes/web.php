@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FilmesController;
 use App\Http\Controllers\UserController; 
-use App\Http\Controllers\Auth\RegisterController; 
+use App\Http\Controllers\BilhetesController; 
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +25,5 @@ Route::get('/filme/{id}/sessoes', [FilmesController::class, 'sessoes'])->name('s
 Route::get('/alterprofile',  [UserController::class, 'index'])->name('alterprofile');
 Route::post('/alterprofile', [UserController::class, 'alterProfile'])->name('alterprofilesubmit');
 Route::post('/alteruser', [UserController::class, 'alterUser'])->name('alterUsersubmit');
+Route::get('/ticketvalidate', [BilhetesController::class, 'index'])->name('ticketAccessControl');
+Route::get('/ticketvalidate/{id}/check', [BilhetesController::class, 'validateBilhete'])->name('validateTicket');
