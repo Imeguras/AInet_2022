@@ -69,6 +69,11 @@ class CarrinhoController extends Controller
 
         $adicionados = 0;
         //dd($lugaresID);
+        
+        if ($lugaresID === null) {
+            return redirect()->route('filmes');
+        }
+
         foreach ($lugaresID as $id) {
             $existe = false;
 
@@ -121,5 +126,9 @@ class CarrinhoController extends Controller
 
         session()->flash('success', 'Bilhete removido com sucesso.');
         return redirect()->back();
+    }
+
+    public function pagar(){
+        return view('carrinho.pagar');
     }
 }
