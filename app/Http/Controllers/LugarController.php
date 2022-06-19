@@ -20,14 +20,18 @@ class LugarController extends Controller
         foreach ($filas as $fila) {
             $lugares[$fila] = Lugar::where('sala_id', $sessao->sala_id)->where('fila', $fila)->get();    
         }
-        $lugares_ocupados = Bilhete::where('sessao_id', $sessao->sala_id)->pluck('lugar_id');
+        $lugares_ocupados = Bilhete::where('sessao_id', $sessao->id)->pluck('lugar_id');
 
         //dd($lugares_ocupados);
         //dd($lugares);
 
         $lugares_sessao = array();
-        foreach (session('bilhetes') as $sessaoBilhetes) {
-            array_push($lugares_sessao, $sessaoBilhetes['lugar_id']);
+        if (session('bilhetes')) {
+            foreach (session('bilhetes') as $sessaoBilhetes) {
+                if ($sessaoBilhetes['sessao']->id == $sessao->id) {
+                    array_push($lugares_sessao, $sessaoBilhetes['lugar']->id);
+                }
+            }
         }
 
         return view('lugar.escolher')
