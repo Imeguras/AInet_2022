@@ -2,8 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FilmesController;
+use App\Http\Controllers\CarrinhoController;
+use App\Http\Controllers\LugarController;
 use App\Http\Controllers\UserController; 
 use App\Http\Controllers\BilhetesController; 
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +30,10 @@ Route::post('/alterprofile', [UserController::class, 'alterProfile'])->name('alt
 Route::post('/alteruser', [UserController::class, 'alterUser'])->name('alterUsersubmit');
 Route::get('/ticketvalidate', [BilhetesController::class, 'index'])->name('ticketAccessControl');
 Route::get('/ticketvalidate/{id}/check', [BilhetesController::class, 'validateBilhete'])->name('validateTicket');
+Route::get('/escolher-lugar/{id}', [LugarController::class, 'escolher'])->name('escolher_lugar');
+Route::get('/carrinho-de-compras', [CarrinhoController::class, 'index'])->name('carrinho_compras');
+Route::get('/limpar-carrinho', [CarrinhoController::class, 'limpar'])->name('limpar_carrinho');
+Route::get('/remover-bilhete/{key}', [CarrinhoController::class, 'remover'])->name('remover_bilhete');
+
+
+Route::post('/adicionar-ao-carrinho', [CarrinhoController::class, 'adicionar'])->name('adicionar');
