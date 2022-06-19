@@ -60,9 +60,14 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
+						<div class="row mb-1">
+							
+							<label class="row-md-1 offset-md-4 " style="font-style: oblique;font-weight:800;">
+								Após registares deves alterar o teu perfil para definires modos de pagamento, etc..
+							</label>
+						</div>
+						<div class="row mb-0">
+                            <div class="col-md-1 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>

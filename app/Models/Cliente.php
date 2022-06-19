@@ -34,6 +34,8 @@ class Cliente extends Model
 {
     use HasFactory;
 	protected $table = "clientes"; 
+	//fillable: id, nif, tipo_pagamento, ref_pagamento, custom, created_at, updated_at, deleted_at
+	protected $fillable = ['id','nif','tipo_pagamento','ref_pagamento','custom'];
 
     public function bilhetes(){
         return $this->hasMany(Bilhete::class);
