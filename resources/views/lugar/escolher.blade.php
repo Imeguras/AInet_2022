@@ -48,11 +48,16 @@
 						</div>
 		            </div>
 		            <br>
-		            <form action="{{route('adicionar')}}" method="POST">
-		            	<input type="hidden" name="_token" value="{{ csrf_token() }}">
-		            	<input type="hidden" name="sessaoID" value="{{$sessao->id}}">
-	               		<button type="submit" class="btn btn-primary">Escolher</button>
-		            </form>
+		            <div class="container" style="display: flex;">
+			            <form id="formEscolherLugares" action="{{route('adicionar')}}" method="POST">
+			            	<input type="hidden" name="_token" value="{{ csrf_token() }}">
+			            	<input type="hidden" name="sessaoID" value="{{$sessao->id}}">
+		               		<button type="submit" class="btn btn-primary">Escolher</button>
+			            </form>
+			            <div class="container text-end">
+			            	<a href="{{route('filmes')}}" class="btn btn-danger">Cancelar</a>
+			            </div>
+		            </div>
 			    </div>
 			</div>
     	</div>
@@ -61,7 +66,7 @@
 <script type="text/javascript">
 	function addId(id){
 		
-		var form = document.getElementsByTagName("form")[0]
+		var form = document.getElementById("formEscolherLugares")
 		//console.log(form)
 		
 		var exists = false;

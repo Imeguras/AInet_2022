@@ -9,6 +9,17 @@
                 	<h3>Carrinho de Compras</h3>
                 </div>
                 <div class="card-body">
+                	@if ($message = Session::get('success'))
+	                	<div class="alert alert-success" role="alert">
+							<h4 class="alert-heading">Sucesso !</h4>
+						    <p>{{$message}}</p>
+						</div>
+					@elseif($message = Session::get('error'))
+	                	<div class="alert alert-danger" role="alert">
+							<h4 class="alert-heading">Erro !</h4>
+						    <p>{{$message}}</p>
+						</div>
+					@endif
                 	@if($bilhetes == null)
                 		<h4 class="text-center">Não há bilhetes no carrinho</h4>
                 	@else
@@ -77,7 +88,7 @@
 				</div>
 				<div class="card-body text-end">
 					<a href=" {{ route('limpar_carrinho') }}" class="btn btn-danger">Limpar Carrinho</a>
-					@if (Auth::user())
+					@if (Auth::user() && $bilhetes != null)
 						<a href="#" class="btn btn-primary">Pagar</a>	
 					@else
 						<a href="#" class="btn btn-primary disabled" aria-disabled="true">Pagar</a>
