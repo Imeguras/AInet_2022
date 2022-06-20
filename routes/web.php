@@ -8,6 +8,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\BilhetesController; 
 use App\Http\Controllers\Auth\RegisterController; 
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\BilhetesController;
+use App\Http\Controllers\SessoesController;
 use App\Http\Controllers\RecibosController;
 
 /*
@@ -50,3 +52,13 @@ Route::post('/adicionar-ao-carrinho', [CarrinhoController::class, 'adicionar'])-
 Route::post('/paymentVISA',[PaymentController::class, 'paymentVISA'])->name('pay_with_VISA');
 Route::post('/paymentPayPal',[PaymentController::class, 'paymentPayPal'])->name('pay_with_PayPal');
 Route::post('/paymentMBWAY',[PaymentController::class, 'paymentMBWAY'])->name('pay_with_MBWAY');
+
+//Route::middleware('auth', 'can:cru')->group(function () {
+	Route::get('/crudFilmes', [FilmesController::class, 'crudIndex'])->name('filmes_crud');
+	Route::get('/crudFilmes/create', [FilmesController::class, 'createView'])->name('filmes_create');
+	Route::get('/crudFilmes/{id}/edit', [FilmesController::class, 'editView'])->name('filmes_edit');
+	Route::post('/crudFilmes/create', [FilmesController::class, 'create'])->name('filmes_store');
+	Route::post('/crudFilmes/{id}/edit', [FilmesController::class, 'edit'])->name('filmes_update');
+//});
+Route::get('/crudSessoes/{id}/create', [SessoesController::class, 'index'])->name('filmes_addSessoes');
+Route::post('/crudSessoes/create', [SessoesController::class, 'create'])->name('sessoes_create');

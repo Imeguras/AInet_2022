@@ -31,32 +31,26 @@ class UserPolicy
         return ($user->tipo == 'F') || ($user->id == $cliente->user_id);
     }
 
-    public function create(User $user)
-    {
-        return false;
-        
-    }
-
-    public function update(User $user, users $cliente)
-    {
+    public function update(User $user, users $cliente){
         return $user->id == $cliente->user_id;
     }
 
     public function delete(User $user, users $cliente)
     {
         return false;
-        // It would be: return $user->admin;
-        // If before method was not implemented
     }
 
-    public function restore(User $user, users $cliente)
-    {
+    public function restore(User $user, users $cliente){
         //
     }
 
     public function forceDelete(User $user, users $cliente)
     {
         //
+    }
+	public function cru(User $user){
+		
+        return $user->tipo == "A";
     }
 
 }
