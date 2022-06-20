@@ -9,6 +9,7 @@ use App\Http\Controllers\BilhetesController;
 use App\Http\Controllers\Auth\RegisterController; 
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RecibosController;
+use App\Http\Controllers\BilhetesController; 
 
 
 /*

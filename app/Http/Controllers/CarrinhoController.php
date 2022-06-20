@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Configuracao;
 use App\Models\Sessao;
 use App\Models\Lugar;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Cliente;
 
 class CarrinhoController extends Controller
 {
@@ -129,6 +131,8 @@ class CarrinhoController extends Controller
     }
 
     public function pagar(){
-        return view('carrinho.pagar');
+        $cliente = Cliente::where('id', Auth::user()->id)->get()[0];
+        return view('carrinho.pagar')
+            ->withCliente($cliente);
     }
 }

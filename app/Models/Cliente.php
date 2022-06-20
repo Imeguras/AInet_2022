@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Models\Cliente
@@ -32,8 +33,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cliente extends Model
 {
-    use HasFactory;
-	protected $table = "clientes"; 
+    use HasFactory, SoftDeletes;
+	protected $table = "clientes";
+
 	//fillable: id, nif, tipo_pagamento, ref_pagamento, custom, created_at, updated_at, deleted_at
 	protected $fillable = ['id','nif','tipo_pagamento','ref_pagamento','custom'];
 
