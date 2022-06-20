@@ -5,10 +5,10 @@ use App\Http\Controllers\FilmesController;
 use App\Http\Controllers\CarrinhoController;
 use App\Http\Controllers\LugarController;
 use App\Http\Controllers\UserController; 
+use App\Http\Controllers\BilhetesController; 
 use App\Http\Controllers\Auth\RegisterController; 
 use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\BilhetesController; 
-
+use App\Http\Controllers\RecibosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +24,7 @@ use App\Http\Controllers\BilhetesController;
 Auth::routes(['verify'=>true]);
 
 Route::get('/', [FilmesController::class, 'index'])->name('filmes');
-
+Route::get('/recibos', [RecibosController::class, 'index'])->name('recibos');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/filme/{id}/sessoes', [FilmesController::class, 'sessoes'])->name('sessoes');
 //Alteração dos perfis de utilizador
@@ -41,6 +41,8 @@ Route::get('/carrinho-de-compras', [CarrinhoController::class, 'index'])->name('
 Route::get('/limpar-carrinho', [CarrinhoController::class, 'limpar'])->name('limpar_carrinho');
 Route::get('/remover-bilhete/{key}', [CarrinhoController::class, 'remover'])->name('remover_bilhete');
 Route::get('/pagar', [CarrinhoController::class, 'pagar'])->name('pagar');
+Route::get('/recibo/{id}',[RecibosController::class, 'detalhes'])->name('consultar');
+Route::get('/bilhetes', [BilhetesController::class, 'listagem'])->name('bilhetes');
 
 Route::post('/alterprofile', [UserController::class, 'alterProfile'])->name('alterprofilesubmit');
 Route::post('/alteruser', [UserController::class, 'alterUser'])->name('alterUsersubmit');

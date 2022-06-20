@@ -45,12 +45,12 @@ class Bilhete extends Model
         return $this->belongsTo(Cliente::class);
     }
 
-    public function sessoes(){
+    public function sessao(){
         return $this->belongsTo(Sessao::class);
     }
 
-    public function lugares(){
-        return $this->hasMany(Lugar::class);
+    public function lugar(){
+        return $this->belongsTo(Lugar::class);
     }
 
     public function recibos(){
