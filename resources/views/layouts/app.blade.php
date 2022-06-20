@@ -82,6 +82,9 @@
                                         <a class="dropdown-item" href="{{ route('recibos') }}">
                                             Ver Recibos
                                         </a>
+                                        <a class="dropdown-item" href=" {{ route('bilhetes') }}">
+                                            Ver Bilhetes Ativos
+                                        </a>
                                     @endif
 									<a class="dropdown-item" href="{{ route('logout') }}"
 										onclick="event.preventDefault();

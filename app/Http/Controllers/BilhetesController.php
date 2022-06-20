@@ -23,11 +23,13 @@ class BilhetesController extends Controller{
 		return view('bilhetes.index')->with('sessoes',$sessoes);
 
    }
+
    public function validateBilhete(Request $request, $id){
 		$request->flash();
 		$bilhete = Bilhete::where('sessao_id', $id)->get();
 		return view('bilhetes.sessao')->with('bilhetes',$bilhete);
 	}
+
 	public function useBilhete(Request $request){
 		$bilhete = Bilhete::find($request->id);
 		$bilhete->estado = "usado";
@@ -36,5 +38,9 @@ class BilhetesController extends Controller{
 		return redirect()->back();
 	}
    
+   public function listagem()
+   {
+   	return view('bilhetes.listagem');
+   }
 
 }

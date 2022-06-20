@@ -42,6 +42,7 @@ Route::get('/limpar-carrinho', [CarrinhoController::class, 'limpar'])->name('lim
 Route::get('/remover-bilhete/{key}', [CarrinhoController::class, 'remover'])->name('remover_bilhete');
 Route::get('/pagar', [CarrinhoController::class, 'pagar'])->name('pagar');
 Route::get('/recibo/{id}',[RecibosController::class, 'detalhes'])->name('consultar');
+Route::get('/bilhetes', [BilhetesController::class, 'listagem'])->name('bilhetes');
 
 Route::post('/alterprofile', [UserController::class, 'alterProfile'])->name('alterprofilesubmit');
 Route::post('/alteruser', [UserController::class, 'alterUser'])->name('alterUsersubmit');
