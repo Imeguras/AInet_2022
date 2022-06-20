@@ -9,8 +9,14 @@
                 	<h3>Salas de cinema</h3>
                 </div>
                 <div class="card-body">
+                    @if ($message = Session::get('success'))
+                        <div class="alert alert-success" role="alert">
+                            <h4 class="alert-heading">Sucesso !</h4>
+                            <p>{{$message}}</p>
+                        </div>
+                    @endif
                     <div class="container">
-                        <a class="btn btn-primary" href="#">Criar sala</a>
+                        <a class="btn btn-primary" href=" {{ route('admin_salas_create') }}">Criar sala</a>
                     </div>
                     <br>
                     @foreach($salas as $sala)
@@ -19,9 +25,27 @@
                                 <h6>{{$sala->nome}}</h6>
                             </div>
                             <div class="card-body">
-                                <p>ID: {{$sala->id}} </p>
-                                <a class="btn btn-success" href="#"> Editar </a>
-                                <a class="btn btn-danger" href="#"> Apagar</a>
+                                <table class="table table-borderless">
+                                    <tr>
+                                        <td>
+                                            ID: {{$sala->id}}
+                                        </td>
+                                        <td>
+                                            Estado: {{$sala->deleted_at ? "Apagada" : "Operacional"}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Número de lugares: {{count($sala->lugares)}}
+                                        </td>
+                                    </tr>
+                                </table>
+                                <a class="btn btn-success" href=" {{ route('admin_salas_edit', ['id'=>$sala->id]) }}"> Editar </a>
+                                <form method="POST" action="{{ route('admin_salas_delete') }}">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{$sala->id}}">
+                                    <button type="submit" class="btn btn-danger">Apagar</button>
+                                </form>
                             </div>
                         </div>
                         <br>
