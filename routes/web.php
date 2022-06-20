@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\BilhetesController; 
 use App\Http\Controllers\Auth\RegisterController; 
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\RecibosController;
 
 
 /*
@@ -24,7 +25,7 @@ use App\Http\Controllers\PaymentController;
 Auth::routes(['verify'=>true]);
 
 Route::get('/', [FilmesController::class, 'index'])->name('filmes');
-
+Route::get('/recibos', [RecibosController::class, 'index'])->name('recibos');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/filme/{id}/sessoes', [FilmesController::class, 'sessoes'])->name('sessoes');
 //Alteração dos perfis de utilizador
