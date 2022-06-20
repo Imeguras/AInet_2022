@@ -88,7 +88,7 @@ class FilmesController extends Controller{
 	}
    public function editView(Request $request, $id){
 	   	$filme= Filme::where('id', $id)->first();
-		return  view('filmes.crud_operation')->with('filme', $filme);
+		return  view('filmes.crud_operation')->with('filme', $filme)->with('generos', Genero::all());
    }
    public function create(Request $request){
 	   //create the new filme with $request parameters
@@ -96,17 +96,40 @@ class FilmesController extends Controller{
 	   $filme->titulo = $request->input('titulo');
 	   $filme->sumario = $request->input('sumario');
 	   $filme->genero_code = $request->input('genero');
+	   $filme->ano= $request->input('ano');
+	   $filme->custom= $request->input('custom');
+	   $filme->trailer_url=$this->storeImage($request);
+	   //$filme->trailer_url= $request->input('trailer_url');
+	   $filme->cartaz_url= $request->input('cartaz_url');
 	   $filme->save();
 	   return redirect()->back();
 
    }
-   public function update(Request $request, $id){
+   public function edit(Request $request, $id){
 	   //update the filme with $request parameters
 	   $filme = Filme::where('id', $id)->first();
 	   $filme->titulo = $request->input('titulo');
 	   $filme->sumario = $request->input('sumario');
-	   $filme->genero_code = $request->input('genero');
+	   $filme->genero_code = $request->input('genero_code');
+	 //  $filme->genero_code = $request->input('genero');
+	   $filme->ano= $request->input('ano');
+	 //if custom no null
+	   if($request->input('custom')!=null){
+		   $filme->custom= $request->input('custom');
+	   }  
+	   if($request->file('trailer_url')!=null){
+		   $filme->trailer_url=$this->storeImage($request);
+	   }
+	   if($request->input('cartaz_url')!=null){
+		   $filme->cartaz_url=$request->input('cartaz_url');
+	   }
+	   
 	   $filme->save();
 	   return redirect()->back();
    }
+   public function storeImage(Request $request) {
+	   	dd($request);
+	$path = $request->file('trailer_url')->store('public/storage/cartazes/');
+	return substr($path, strlen('public/storage/cartazes/'));
+  }
 }
