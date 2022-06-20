@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Filme;
 use App\Models\Sessao;
 use App\Models\Genero;
-
+use Illuminate\Http\UploadedFile;
 class FilmesController extends Controller{
    public function index(Request $request)
    {
@@ -88,7 +88,7 @@ class FilmesController extends Controller{
    
    public function createView(){
 		//return view filmes.crud_operation
-		return view('filmes.crud_operation');
+		return view('filmes.crud_operation')->with('generos', Genero::all());
 	}
    public function editView(Request $request, $id){
 	   	$filme= Filme::where('id', $id)->first();
@@ -99,12 +99,21 @@ class FilmesController extends Controller{
 	   $filme = new Filme();
 	   $filme->titulo = $request->input('titulo');
 	   $filme->sumario = $request->input('sumario');
-	   $filme->genero_code = $request->input('genero');
+	   $filme->genero_code = $request->input('genero_code');
+	 //  $filme->genero_code = $request->input('genero');
 	   $filme->ano= $request->input('ano');
-	   $filme->custom= $request->input('custom');
-	   $filme->trailer_url=$this->storeImage($request);
-	   //$filme->trailer_url= $request->input('trailer_url');
-	   $filme->cartaz_url= $request->input('cartaz_url');
+	 //if custom no null
+	   if($request->input('custom')!=null){
+		   $filme->custom= $request->input('custom');
+	   }  
+	   if($request->input('trailer_url')!=null){
+		   $filme->trailer_url=$request->input('trailer_url');
+	   }
+	   if($request->input('cartaz_url')!=$filme->cartaz_url){
+		   $filme->cartaz_url=$this->storeImage($request);
+	   }
+	   
+	   $filme->save();
 	   $filme->save();
 	   return redirect()->back();
 
@@ -132,10 +141,12 @@ class FilmesController extends Controller{
 	   return redirect()->back();
    }
    public function storeImage(Request $request) {
+
+	$fn=$request->file('cartaz_url')->getClientOriginalName();
+
+	$request->file('cartaz_url')->storeAs('public/cartazes/', $fn);
 	
-	var_dump($request);
-	$path = $request->file('cartaz_url')->store('public/storage/cartazes/');
-	dd(substr($path, strlen('public/storage/cartazes/')));
-	return ;
+	
+	return $fn;
   }
 }
