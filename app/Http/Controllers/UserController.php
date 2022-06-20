@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Cliente;
 use App\Http\Controllers\FilmesController;
 use App\Models\Users;
-
+use Illuminate\Support\Facades\Hash;
 class UserController extends Controller{
 	public function alterProfile(Request $request){
 		$user = $request->user();
@@ -26,6 +26,10 @@ class UserController extends Controller{
 	
 		}
 		$user->name = $request->name;
+		$password = $request->password;
+		if($password!=null){
+			$user->password = Hash::make($password);
+		}
 		$user->save();
 
 		//return FilmesController::index();
