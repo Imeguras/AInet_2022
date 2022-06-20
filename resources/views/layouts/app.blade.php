@@ -58,7 +58,15 @@
                                 </a>
 								
 								<div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-									
+									{{--If the user is a admin--}}
+									@if(Auth::user()->tipo == 'A') 
+										<a class="dropdown-item" href="{{ route('filmes_crud') }}">
+											{{ __('Criar e Alterar Filmes/Sessões') }}
+										</a>
+										<form id="crudFilmes" action="{{ route('filmes_crud') }}" method="GET"  class="d-none">
+											@csrf
+										</form>
+									@endif
 									{{-- If its an employee $user->tipo=='F'--}}
 									@if(Auth::user()->tipo=='F')
 										<a class="dropdown-item" href="{{ route('ticketAccessControl') }}" onclick="event.preventDefault();

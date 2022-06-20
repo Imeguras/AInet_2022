@@ -8,21 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Filme;
 use App\Models\Sessao;
 use App\Models\Genero;
-
-class FilmesController extends Controller
-{
-    /* $qry = Disciplina::query();
-        if ($curso) {
-            $qry->where('curso', $curso);
-        }
-        $disciplinas = $qry->paginate(10);
-        $cursos = Curso::pluck('nome', 'abreviatura');
-        return view('disciplinas.admin')
-            ->withDisciplinas($disciplinas)
-            ->withCursos($cursos)
-            ->withSelectedCurso($curso);
-    */
-   
+use Illuminate\Http\UploadedFile;
+class FilmesController extends Controller{
    public function index(Request $request)
    {
         $request->flash();
@@ -93,5 +80,72 @@ class FilmesController extends Controller
               ->withFilme($filme)
               ->withSessoes($sessoes);
    }
+   public function crudIndex(){
+	   $filmes = Filme::all();
+		return view('filmes.crud_view')
+			  ->withFilmes($filmes);
+   }
+   
+   public function createView(){
+		//return view filmes.crud_operation
+		return view('filmes.crud_operation')->with('generos', Genero::all());
+	}
+   public function editView(Request $request, $id){
+	   	$filme= Filme::where('id', $id)->first();
+		return  view('filmes.crud_operation')->with('filme', $filme)->with('generos', Genero::all());
+   }
+   public function create(Request $request){
+	   //create the new filme with $request parameters
+	   $filme = new Filme();
+	   $filme->titulo = $request->input('titulo');
+	   $filme->sumario = $request->input('sumario');
+	   $filme->genero_code = $request->input('genero_code');
+	 //  $filme->genero_code = $request->input('genero');
+	   $filme->ano= $request->input('ano');
+	 //if custom no null
+	   if($request->input('custom')!=null){
+		   $filme->custom= $request->input('custom');
+	   }  
+	   if($request->input('trailer_url')!=null){
+		   $filme->trailer_url=$request->input('trailer_url');
+	   }
+	   if($request->input('cartaz_url')!=null){
+		   $filme->cartaz_url=$this->storeImage($request);
+	   }
+	   
+	   $filme->save();
+	   return redirect()->back();
 
+   }
+   public function edit(Request $request, $id){
+	   //update the filme with $request parameters
+	   $filme = Filme::where('id', $id)->first();
+	   $filme->titulo = $request->input('titulo');
+	   $filme->sumario = $request->input('sumario');
+	   $filme->genero_code = $request->input('genero_code');
+	 //  $filme->genero_code = $request->input('genero');
+	   $filme->ano= $request->input('ano');
+	 //if custom no null
+	   if($request->input('custom')!=null){
+		   $filme->custom= $request->input('custom');
+	   }  
+	   if($request->input('trailer_url')!=null){
+		   $filme->trailer_url=$request->input('trailer_url');
+	   }
+	   if($request->file('cartaz_url')->getClientOriginalName()!=$filme->cartaz_url){
+		   $filme->cartaz_url=$this->storeImage($request);
+	   }
+	   
+	   $filme->save();
+	   return redirect()->back();
+   }
+   public function storeImage(Request $request) {
+
+	$fn=$request->file('cartaz_url')->getClientOriginalName();
+
+	$request->file('cartaz_url')->storeAs('public/cartazes/', $fn);
+	//dd($fn, $request->file('cartaz_url'));
+	
+	return $fn;
+  }
 }
