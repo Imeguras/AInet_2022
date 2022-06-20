@@ -78,6 +78,9 @@
 											@csrf
 										</form>
 									@endif
+                                    @if (Auth::user()->tipo == 'A')
+                                        <a class="dropdown-item" href=" {{ route('admin_salas') }}">Salas de Cinema</a>
+                                    @endif
                                     @if (Auth::user()->tipo == 'C')
                                         <a class="dropdown-item" href="{{ route('recibos') }}">
                                             Ver Recibos
