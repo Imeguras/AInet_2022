@@ -117,19 +117,21 @@ class FilmesController extends Controller{
 	   if($request->input('custom')!=null){
 		   $filme->custom= $request->input('custom');
 	   }  
-	   if($request->file('trailer_url')!=null){
-		   $filme->trailer_url=$this->storeImage($request);
+	   if($request->input('trailer_url')!=null){
+		   $filme->trailer_url=$request->input('trailer_url');
 	   }
-	   if($request->input('cartaz_url')!=null){
-		   $filme->cartaz_url=$request->input('cartaz_url');
+	   if($request->input('cartaz_url')!=$filme->cartaz_url){
+		   $filme->cartaz_url=$this->storeImage($request);
 	   }
 	   
 	   $filme->save();
 	   return redirect()->back();
    }
    public function storeImage(Request $request) {
-	   	dd($request);
-	$path = $request->file('trailer_url')->store('public/storage/cartazes/');
-	return substr($path, strlen('public/storage/cartazes/'));
+	
+	var_dump($request);
+	$path = $request->file('cartaz_url')->store('public/storage/cartazes/');
+	dd(substr($path, strlen('public/storage/cartazes/')));
+	return ;
   }
 }
