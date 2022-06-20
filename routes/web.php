@@ -35,3 +35,11 @@ Route::get('/remover-bilhete/{key}', [CarrinhoController::class, 'remover'])->na
 
 
 Route::post('/adicionar-ao-carrinho', [CarrinhoController::class, 'adicionar'])->name('adicionar');
+
+Route::middleware('auth', 'can:cru')->group(function () {
+	Route::get('/crudFilmes', [FilmesController::class, 'crudIndex'])->name('filmes_crud');
+	Route::get('/crudFilmes/create', [FilmesController::class, 'createView'])->name('filmes_create');
+	Route::get('/crudFilmes/{id}/edit', [FilmesController::class, 'editView'])->name('filmes_edit');
+	Route::post('/crudFilmes/create', [FilmesController::class, 'create'])->name('filmes_store');
+	Route::post('/crudFilmes/{id}/edit', [FilmesController::class, 'edit'])->name('filmes_update');
+});
