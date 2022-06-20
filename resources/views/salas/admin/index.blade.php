@@ -51,6 +51,7 @@
                         <br>
                     @endforeach
                 </div>
+                {{$salas->withQueryString()->links()}}
             </div>
         </div>
     </div>

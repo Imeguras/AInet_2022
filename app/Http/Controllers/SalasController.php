@@ -28,9 +28,16 @@ class SalasController extends Controller
     {
         $sala = Sala::where('id', $id)->first();
         $linha = 0;
-        while ($sala->lugares[$linha]->fila == "A") {
-            $linha++;
+        
+        foreach ($sala->lugares as $lugar) {
+            if ($lugar->fila == "A") {
+                $linha++;
+            }
+            else{
+                break;
+            }
         }
+
         return view('salas.admin.createEdit')
                 ->withSala($sala)
                 ->withLinha($linha);
@@ -43,8 +50,12 @@ class SalasController extends Controller
         if ($oldSala) {
 
             $maxLinhaOld = 0;
-            while ($oldSala->lugares[$maxLinhaOld]->fila == "A") {
-                $maxLinhaOld++;
+            foreach ($oldSala->lugares as $lugares) {
+                if ($lugares->fila == "A") {
+                    $maxLinhaOld++;
+                }else{
+                    break;
+                }
             }
 
             $fila = "A";
@@ -54,6 +65,7 @@ class SalasController extends Controller
                 if ($maxLinhaOld > $request->input('lugaresLinha')) {
                     //adicionar de filas superiores à fila de baixo
                     $control = 0;
+                    $fila = "B";
                     foreach ($oldSala->lugares as $value) {
                         $control++;
                         if ($control <= $request->input('lugaresLinha')) {
@@ -113,7 +125,7 @@ class SalasController extends Controller
                     
                     if ($lastPosicao == $request->input('lugaresLinha')) {
                         $lastFila++;
-                        $lastPosicao = 0;
+                        $lastPosicao = 1;
                     }
 
                     $diffLugares = -$diffLugares;
@@ -126,7 +138,7 @@ class SalasController extends Controller
                             ]);
 
                         if ($lastPosicao == $request->input('lugaresLinha')) {
-                            $lastPosicao = 0;
+                            $lastPosicao = 1;
                             $lastFila++;
                         }else{
                             $lastPosicao++;
@@ -142,7 +154,7 @@ class SalasController extends Controller
                             ['posicao', '=', $lastPosicao]
                         ])->delete();
 
-                        if ($lastPosicao == 0) {
+                        if ($lastPosicao == 1) {
                             $lastPosicao = $request->input('lugaresLinha');
                             $lastFila--;
                         }else{
