@@ -54,10 +54,12 @@
                                         </tr>
                                     </tbody>
                                 </table>
+                                <a class="btn btn-primary" href="{{ route('consultar', ['id' => $recibo->id]) }}">Consultar</a>
                             </div>
                         </div>
                         <br>
                     @endforeach
+                    {{$recibos->withQueryString()->links()}}
                 </div>
             </div>
         </div>

@@ -9,8 +9,6 @@ use App\Http\Controllers\BilhetesController;
 use App\Http\Controllers\Auth\RegisterController; 
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RecibosController;
-use App\Http\Controllers\BilhetesController; 
-
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +41,7 @@ Route::get('/carrinho-de-compras', [CarrinhoController::class, 'index'])->name('
 Route::get('/limpar-carrinho', [CarrinhoController::class, 'limpar'])->name('limpar_carrinho');
 Route::get('/remover-bilhete/{key}', [CarrinhoController::class, 'remover'])->name('remover_bilhete');
 Route::get('/pagar', [CarrinhoController::class, 'pagar'])->name('pagar');
+Route::get('/recibo/{id}',[RecibosController::class, 'detalhes'])->name('consultar');
 
 Route::post('/alterprofile', [UserController::class, 'alterProfile'])->name('alterprofilesubmit');
 Route::post('/alteruser', [UserController::class, 'alterUser'])->name('alterUsersubmit');
