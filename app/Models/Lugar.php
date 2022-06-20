@@ -30,6 +30,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Lugar extends Model{
     use HasFactory, SoftDeletes;
 	protected $table = "lugares"; 
+    protected $fillable = [
+            'sala_id', 'fila', 'posicao'
+        ];
+    public $timestamps = false;
 
     public function bilhetes(){
         return $this->hasMany(Bilhete::class);

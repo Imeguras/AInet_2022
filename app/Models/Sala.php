@@ -27,6 +27,11 @@ class Sala extends Model
 {
     use HasFactory, SoftDeletes;
 	protected $table = "salas"; 
+    protected $fillable = [
+            'nome'
+        ];
+    public $incrementing = true;
+    public $timestamps = false;
 
     public function lugares(){
         return $this->hasMany(Lugar::class);

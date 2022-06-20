@@ -11,6 +11,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\BilhetesController;
 use App\Http\Controllers\SessoesController;
 use App\Http\Controllers\RecibosController;
+use App\Http\Controllers\SalasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,10 @@ Route::get('/remover-bilhete/{key}', [CarrinhoController::class, 'remover'])->na
 Route::get('/pagar', [CarrinhoController::class, 'pagar'])->name('pagar');
 Route::get('/recibo/{id}',[RecibosController::class, 'detalhes'])->name('consultar');
 Route::get('/bilhetes', [BilhetesController::class, 'listagem'])->name('bilhetes');
+Route::get('/admin/salas', [SalasController::class, 'admin_index'])->name('admin_salas');
+Route::get('/admin/salas/create', [SalasController::class, 'admin_create'])->name('admin_salas_create');
+Route::get('/admin/salas/{id}/edit', [SalasController::class, 'admin_edit'])->name('admin_salas_edit');
+
 
 Route::post('/alterprofile', [UserController::class, 'alterProfile'])->name('alterprofilesubmit');
 Route::post('/alteruser', [UserController::class, 'alterUser'])->name('alterUsersubmit');
@@ -52,6 +57,8 @@ Route::post('/adicionar-ao-carrinho', [CarrinhoController::class, 'adicionar'])-
 Route::post('/paymentVISA',[PaymentController::class, 'paymentVISA'])->name('pay_with_VISA');
 Route::post('/paymentPayPal',[PaymentController::class, 'paymentPayPal'])->name('pay_with_PayPal');
 Route::post('/paymentMBWAY',[PaymentController::class, 'paymentMBWAY'])->name('pay_with_MBWAY');
+Route::post('/admin/salas/save', [SalasController::class, 'admin_save'])->name('admin_salas_save');
+Route::post('/admin/salas/delete', [SalasController::class, 'admin_delete'])->name('admin_salas_delete');
 
 //Route::middleware('auth', 'can:cru')->group(function () {
 	Route::get('/crudFilmes', [FilmesController::class, 'crudIndex'])->name('filmes_crud');
