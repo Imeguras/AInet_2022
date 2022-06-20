@@ -7,8 +7,8 @@ use App\Http\Controllers\LugarController;
 use App\Http\Controllers\UserController; 
 use App\Http\Controllers\Auth\RegisterController; 
 use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\BilhetesController; 
-
+use App\Http\Controllers\BilhetesController;
+use App\Http\Controllers\SessoesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,4 +56,5 @@ Route::post('/paymentMBWAY',[PaymentController::class, 'paymentMBWAY'])->name('p
 	Route::post('/crudFilmes/create', [FilmesController::class, 'create'])->name('filmes_store');
 	Route::post('/crudFilmes/{id}/edit', [FilmesController::class, 'edit'])->name('filmes_update');
 //});
-Route::get('/crudSessoes/{id}/create', [FilmesController::class, 'index'])->name('filmes_addSessoes');
+Route::get('/crudSessoes/{id}/create', [SessoesController::class, 'index'])->name('filmes_addSessoes');
+Route::post('/crudSessoes/create', [SessoesController::class, 'create'])->name('sessoes_create');

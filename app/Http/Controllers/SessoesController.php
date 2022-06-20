@@ -15,4 +15,10 @@ class SessoesController extends Controller{
 		$filme = Filme::where('id', $id)->first();
 		return view('sessoes.index')->with('filme',$filme)->with('salas', Sala::all());
 	}
+	public function create(Request $request, $id){
+		foreach (range(0, $request->datas) as $key) {
+			# code...
+		}
+		
+	}
 }

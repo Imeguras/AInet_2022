@@ -29,7 +29,7 @@
 								<input value="hidden" type="hidden" name="id" value="{{$filme->id}}">
 								<input class="btn btn-primary" type="submit" value="Alterar"></button>
 							</form>
-							<form action="{{route('filmes_addSessoes')}}" method="POST">
+							<form action="{{route('filmes_addSessoes',['id' => $filme->id])}}" method="GET">
 								@csrf
 								<input value="hidden" type="hidden" name="id" value="{{$filme->id}}">
 								<input class="btn btn-danger" type="submit" value="Adicionar Sessoes"></button>
