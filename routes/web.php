@@ -6,6 +6,7 @@ use App\Http\Controllers\CarrinhoController;
 use App\Http\Controllers\LugarController;
 use App\Http\Controllers\UserController; 
 use App\Http\Controllers\Auth\RegisterController; 
+use App\Http\Controllers\PaymentController;
 
 
 /*
@@ -35,3 +36,6 @@ Route::get('/pagar', [CarrinhoController::class, 'pagar'])->name('pagar');
 Route::post('/alterprofile', [UserController::class, 'alterProfile'])->name('alterprofilesubmit');
 Route::post('/alteruser', [UserController::class, 'alterUser'])->name('alterUsersubmit');
 Route::post('/adicionar-ao-carrinho', [CarrinhoController::class, 'adicionar'])->name('adicionar');
+Route::post('/paymentVISA',[PaymentController::class, 'paymentVISA'])->name('pay_with_VISA');
+Route::post('/paymentPayPal',[PaymentController::class, 'paymentPayPal'])->name('pay_with_PayPal');
+Route::post('/paymentMBWAY',[PaymentController::class, 'paymentMBWAY'])->name('pay_with_MBWAY');

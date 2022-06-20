@@ -36,6 +36,10 @@ class Bilhete extends Model
 {
     use HasFactory;
 	protected $table = "bilhetes"; 
+    protected $fillable = [
+            'recibo_id', 'cliente_id', 'sessao_id', 'lugar_id', 'preco_sem_iva', 'estado'
+        ];
+    public $incrementing = true;
 
     public function clientes(){
         return $this->belongsTo(Cliente::class);
