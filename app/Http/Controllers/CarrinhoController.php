@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Configuracao;
 use App\Models\Sessao;
 use App\Models\Lugar;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Cliente;
 
 class CarrinhoController extends Controller
 {
@@ -69,6 +71,11 @@ class CarrinhoController extends Controller
 
         $adicionados = 0;
         //dd($lugaresID);
+        
+        if ($lugaresID === null) {
+            return redirect()->route('filmes');
+        }
+
         foreach ($lugaresID as $id) {
             $existe = false;
 
@@ -121,5 +128,11 @@ class CarrinhoController extends Controller
 
         session()->flash('success', 'Bilhete removido com sucesso.');
         return redirect()->back();
+    }
+
+    public function pagar(){
+        $cliente = Cliente::where('id', Auth::user()->id)->get()[0];
+        return view('carrinho.pagar')
+            ->withCliente($cliente);
     }
 }

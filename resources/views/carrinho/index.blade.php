@@ -89,7 +89,7 @@
 				<div class="card-body text-end">
 					<a href=" {{ route('limpar_carrinho') }}" class="btn btn-danger">Limpar Carrinho</a>
 					@if (Auth::user() && $bilhetes != null)
-						<a href="#" class="btn btn-primary">Pagar</a>	
+						<a href="{{ route('pagar') }}" class="btn btn-primary">Pagar</a>	
 					@else
 						<a href="#" class="btn btn-primary disabled" aria-disabled="true">Pagar</a>
 					@endif

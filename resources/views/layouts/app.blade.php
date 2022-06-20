@@ -67,15 +67,25 @@
 											@csrf
 										</form>
 									@endif
-									<a class="dropdown-item" href="{{ route('alterprofile') }}"
-									   onclick="event.preventDefault();
-													 document.getElementById('alterprofile-form').submit();">
-										{{ __('View/Alter Profile Data') }}
-									</a>
-
-									<form id="alterprofile-form" action="{{ route('alterprofile') }}" method="GET" class="d-none">
-										@csrf
-									</form>
+									{{-- If its an employee $user->tipo=='F'--}}
+									@if(Auth::user()->tipo=='F')
+										<a class="dropdown-item" href="{{ route('ticketAccessControl') }}" onclick="event.preventDefault();
+										document.getElementById('ticketControll-form').submit();">
+											{{ __('Ticket Access Control') }}
+										</a>
+										<form id="ticketControll-form" action="{{ route('ticketAccessControl') }}" method="GET" class="d-none">
+											@csrf
+										</form>
+									@else
+										<a class="dropdown-item" href="{{ route('alterprofile') }}"
+											onclick="event.preventDefault();
+														document.getElementById('alterprofile-form').submit();">
+											{{ __('View/Alter Profile Data') }}
+										</a>
+										<form id="alterprofile-form" action="{{ route('alterprofile') }}" method="GET" class="d-none">
+											@csrf
+										</form>
+									@endif
 									<a class="dropdown-item" href="{{ route('logout') }}"
 										onclick="event.preventDefault();
 													document.getElementById('logout-form').submit();">

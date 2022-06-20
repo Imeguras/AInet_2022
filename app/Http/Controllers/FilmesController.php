@@ -68,7 +68,11 @@ class FilmesController extends Controller{
         $today = date("Y-m-d");
         //dd($time);
 
-        $sessoes = Sessao::where('horario_inicio','>=',$time)->orWhere('data','>', $today)->withCount('lugares')->withCount('bilhetes')->where('filme_id', $filme->id)->where('data', '>=', date("Y-m-d"))->havingRaw('bilhetes_count < lugares_count')->get();
+        $sessoes = Sessao::where(function($query) use ($time,$today){
+                 $query->where('horario_inicio', '>=', $time);
+                 $query->orwhere('data', '>', $today);
+             })->withCount('lugares')->withCount('bilhetes')->where('filme_id', $filme->id)->where('data','>=',$today)->havingRaw('bilhetes_count < lugares_count')->get();
+
 
        //dd($sessoes);
        
