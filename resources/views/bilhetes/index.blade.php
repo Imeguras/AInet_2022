@@ -12,7 +12,9 @@
 			
 		</div>
         <div class="col-md-8">
+			
 			@foreach ($sessoes as $key => $sessao)
+			
 				<div class="card" id="{{$sessao->id}}">
 					<div class="card-header">
 				
