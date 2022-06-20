@@ -18,8 +18,11 @@ class SessoesController extends Controller{
 	public function create(Request $request){
 		dd($request->all());
 		//dd($request);
-		$datas = $request->input('lugares');
-		foreach ($datas as $key) {
+		$datas = $request->input('data');
+		$times = $request->input('horario_inicio')
+		foreach ($datas as $data) {
+			
+			$sessao = new Sessao();
 			# code...
 		}
 		
