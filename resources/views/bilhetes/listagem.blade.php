@@ -23,31 +23,31 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        Filme: {{$bilhete->sessao->filme->titulo}}
+                                                        Filme: {{$bilhete->sessao->filme->titulo ?? "deleted"}}
                                                     </td>
                                                     <td>
-                                                        Sala: {{$bilhete->lugar->sala->nome}}
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        Data: {{$bilhete->sessao->data}}
-                                                    </td>
-                                                    <td>
-                                                        Fila: {{$bilhete->lugar->fila}}
+                                                        Sala: {{$bilhete->lugar->sala->nome ?? "deleted"}}
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        Hora de inicio: {{$bilhete->sessao->horario_inicio}}
+                                                        Data: {{$bilhete->sessao->data ?? "deleted"}}
                                                     </td>
                                                     <td>
-                                                        Posição: {{$bilhete->lugar->posicao}}
+                                                        Fila: {{$bilhete->lugar->fila ?? "deleted"}}
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        Estado: {{$bilhete->estado}}
+                                                        Hora de inicio: {{$bilhete->sessao->horario_inicio ?? "deleted"}}
+                                                    </td>
+                                                    <td>
+                                                        Posição: {{$bilhete->lugar->posicao ?? "deleted"}}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Estado: {{$bilhete->estado ?? "deleted"}}
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -59,7 +59,9 @@
                         <br>
                     @endforeach
                 </div>
-                {{$bilhetes->withQueryString()->links()}}
+                <div class="container">
+                    {{$bilhetes->withQueryString()->links()}}
+                </div>
             </div>
         </div>
     </div>
