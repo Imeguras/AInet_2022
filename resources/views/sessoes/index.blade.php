@@ -28,8 +28,7 @@
 					</select>
 					<div id="inject_stuff">
 					</div>
-					<div id="inject_results">
-					</div>
+
 				</div>
 				<input class="btn btn-primary" type="submit" value="Adicionar Sessoes"></button>
 			</form>
@@ -41,13 +40,13 @@
 document.getElementById("recurrer").addEventListener("change", function(){
 	var value = this.value;
 	//remove every child from inject_results
-	var inject_results = document.getElementById("inject_results");
-	while (inject_results.firstChild) {
-		inject_results.removeChild(inject_results.firstChild);
+	var inject_stuff = document.getElementById("inject_stuff");
+	while (inject_stuff.firstChild) {
+		inject_stuff.removeChild(inject_stuff.firstChild);
 	}
 	
 	if(value == 1){
-		var inject_stuff = document.getElementById("inject_stuff");
+	
 		
 		
 
@@ -57,7 +56,7 @@ document.getElementById("recurrer").addEventListener("change", function(){
 		//ask for a date and insert that input hidden on the form
 	}else if(value == 2){
 		//ask for two dates and insert the dates on inputs hidden on the form
-		var inject_stuff = document.getElementById("inject_stuff");
+
 		inject_stuff.innerHTML = '<label for="data">Data Inicial:</label>'+
 								'<input type="date" class="form-control" id="data1" onchange="doStuff()">'+
 								'<label for="data">Data Final:</label>'+
@@ -68,6 +67,7 @@ document.getElementById("recurrer").addEventListener("change", function(){
 		//todo demasiado chato
 	}
 });
+
 function doStuff(){
 	//insert every day between data1 and data2 on the form
 
@@ -76,7 +76,7 @@ function doStuff(){
 	if(data1==null||data2==null){
 		return; 
 	}
-	var inject_results = document.getElementById("inject_results");
+	
 	var inject_stuff = document.getElementById("inject_stuff");
 	var date1 = new Date(data1);
 	var date2 = new Date(data2);
@@ -88,7 +88,7 @@ function doStuff(){
 		foo++;
 		var inject_stuff = document.getElementById("inject_stuff");
 		inject_stuff.innerHTML = '<label for="data">Data:</label>'+
-								'<input type="hidden" class="form-control" id="data'.foo.'" name="data[]" value="'d.getDate()'">';
+								'<input type="hidden" class="form-control" id="data'+foo+'" name="data[]" value="'+d.getDate()+'">';
 		d.setDate(d.getDate() + 1);
 	}
 }
