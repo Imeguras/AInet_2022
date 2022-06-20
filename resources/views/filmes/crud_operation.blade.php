@@ -44,16 +44,12 @@
 							<label id="genero-lbl1" for="genero-input1" class="col-md-4 col-form-label text-md-end">
 								{{ __('O genero do filme:') }}
 							</label>
-							{{-- a secret input to be used to store the name of the genero--}}
-							<input id="genero-inputHidden" type="hidden" class="form-control @error('genero') is-invalid @enderror" name="genero_code" value="">
+		
+							
 							<div class="col-md-6">
-								<select id="genero-input1" class="form-control @error('genero') is-invalid @enderror" name="genero" required autocomplete="genero">
-									@isset($filme)
-									<option value="{{$filme->genero->id}}" selected>{{$filme->genero->code}}</option>
-									@endisset
-	
+								<select id="genero-input1" class="form-control @error('genero') is-invalid @enderror" name="genero_code" required>
 									@foreach ($generos as $genero)
-										<option value="{{$genero->id}}" @isset($filme) @if($filme->genero_code == $genero->id) selected @endif @endisset>{{$genero->nome}}</option>
+										<option value="{{$genero->code}}" @isset($filme) @if($filme->genero_code == $genero->code) selected @endif @endisset>{{$genero->nome}}</option>
 									@endforeach
 								</select>
 								@error('genero')	
@@ -141,12 +137,5 @@
     	</div>
 	</div>
 </div>
-<script>
-	//find select generos and add a change event listener that causes genero-inputHidden to have the value of the text selected
-	var generos = document.getElementById('genero-input1');
-	generos.addEventListener('change', function(){
-		document.getElementById('genero-inputHidden').value = generos.options[generos.selectedIndex].text;
-	});
-	
-</script>
+
 @endsection
