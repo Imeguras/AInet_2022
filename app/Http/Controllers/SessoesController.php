@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use App\Models\Filme;
 use App\Models\Sala;
+use App\Models\Sessao;
 use App\Models\Genero;
 use Illuminate\Http\UploadedFile;
 class SessoesController extends Controller{
@@ -16,15 +17,25 @@ class SessoesController extends Controller{
 		return view('sessoes.index')->with('filme',$filme)->with('salas', Sala::all());
 	}
 	public function create(Request $request){
-		dd($request->all());
-		//dd($request);
 		$datas = $request->input('data');
-		$times = $request->input('horario_inicio')
-		foreach ($datas as $data) {
-			
-			$sessao = new Sessao();
-			# code...
-		}
+		$times = $request->input('horario_inicio');
+		//separate times in $times where delimiter is ; and then parse time 
+		$times = explode(';', $times);
+		$times = array_map(function($time){
+			return date('H:i', strtotime($time));
+		}, $times);
 		
+		//Foreach data in datas and time in times, create a sessao
+		foreach($datas as $key => $data){
+			foreach($times as $key => $time){
+				$sessao = new Sessao();
+				$sessao->filme_id = $request->input('filme_id');
+				$sessao->sala_id = $request->input('sala_id');
+				$sessao->data = $data;
+				$sessao->horario_inicio = $times[$key];
+				$sessao->save();
+			}
+		}
+				
 	}
 }
