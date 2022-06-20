@@ -22,7 +22,7 @@ class PaymentController extends Controller
 
             session()->forget('bilhetes');
             session()->flash('success', 'Bilhetes pagos com sucesso');
-            return view('filmes');
+            return redirect()->route('filmes');
         }
 
         session()->flash('error', 'Cartão não aceite. Verifique os valores introduzidos');
@@ -41,7 +41,7 @@ class PaymentController extends Controller
 
             session()->forget('bilhetes');
             session()->flash('success', 'Bilhetes pagos com sucesso');
-            return view('filmes.index');
+            return redirect()->route('filmes');
         }
 
         session()->flash('error', 'Número de telemóvel inválido. Verifique os valores introduzidos');
@@ -60,7 +60,7 @@ class PaymentController extends Controller
 
             session()->forget('bilhetes');
             session()->flash('success', 'Bilhetes pagos com sucesso');
-            return view('filmes.index');
+            return redirect()->route('filmes');
         }
 
         session()->flash('error', 'Email inválido. Verifique os valores introduzidos');
